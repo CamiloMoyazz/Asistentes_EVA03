@@ -5,6 +5,7 @@
  */
 package cl.inacap.asistentes_eva03.dto;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +17,7 @@ import javax.persistence.*;
 })
 
 @Table(name = "Asistente")
-public class Asistente {
+public class Asistente implements Serializable{
         
         @Id
         @Column(name = "Rut")
@@ -34,9 +35,10 @@ public class Asistente {
         @Column(name = "Estado")
 	private String Estado;
 
+      
     public Asistente() {
     }
-
+        
     public Asistente(String Rut, String Nombre, String Apellido, int Edad, String Empresa, String Region, String Estado) {
         this.Rut = Rut;
         this.Nombre = Nombre;
@@ -46,6 +48,8 @@ public class Asistente {
         this.Region = Region;
         this.Estado = Estado;
     }
+
+
 
     public String getRut() {
         return Rut;

@@ -15,6 +15,7 @@ import java.util.List;
 public interface AsistenteService {
         
     public List<Asistente> listaAsistentes();
+    public int totalAsistentes();
     public Asistente encontrarPorRut(Asistente asistente);
     public void ingresarAsistente(Asistente asistente);
     public void eliminarAsistente(Asistente asistente);

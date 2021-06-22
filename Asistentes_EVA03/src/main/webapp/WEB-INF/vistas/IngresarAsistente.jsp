@@ -23,7 +23,7 @@
 
 	<div class="columns is-centered">
 		<div class="column is-5">
-			<form method="POST" action="IngresarAsistenteController.do">
+			<form method="POST" action="IngresarAsistentesController.do">
 					<!-- COMIENZO DEL CARD -->
 				<div class="card mt-6">
 					<div class="card-header has-background-dark">

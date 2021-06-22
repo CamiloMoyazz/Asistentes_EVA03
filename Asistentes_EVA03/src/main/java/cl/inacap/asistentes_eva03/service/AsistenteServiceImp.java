@@ -38,6 +38,11 @@ public class AsistenteServiceImp implements AsistenteService {
     public void eliminarAsistente(Asistente asistente) {
        asistenteDAO.deleteAsistente(asistente);
     }
+
+    @Override
+    public int totalAsistentes() {
+        return asistenteDAO.totalAsistentes();
+    }
     
     
     

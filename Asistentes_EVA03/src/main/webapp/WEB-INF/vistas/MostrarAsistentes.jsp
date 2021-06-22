@@ -12,7 +12,8 @@
 					<label class="label">Filtrar por Estado</label>
 					<div class="select">
 						<select name="filtro-select" id="filtro-select">
-							<option>Pagada</option>
+                                                        <option>Todas</option>
+							<option>Pagado</option>
 							<option>Con Deuda</option>
 						</select>
 					</div>
@@ -37,7 +38,7 @@
 					<tbody>
                                             <c:forEach items="${asistentes}" var="asistente">
 						<tr>
-							<td>${asistente.nombre}</td>
+							<td>${asistente.nombre} ${asistente.apellido}</td>
 							<td>${asistente.empresa}</td>
 							<td>${asistente.region}</td>
 							<td>${asistente.estado}</td>
@@ -53,7 +54,9 @@
 			<div class="column is-5 is-one-quarter">
 				<div class="field mt-1 ml-4 pl-4 ">
 						<label class="label">Total de Asistentes Registrados</label>
-						<label class="label ml-3 has-text-centered">12</label>
+                                              
+                                                    <label class="label ml-3 has-text-centered">${total}</label>
+                                               
 				</div>
 			</div>
 		
