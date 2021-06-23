@@ -5,14 +5,28 @@
 	<jsp:include page="../templates/header.jsp"></jsp:include>
 	
 <main class="container">
-  
+    
+    <!-- VENTANA DE ALERTA ERROR ASISTENTE REGISTRADO -->
+    <div class="container mt-4">
+        <c:if  test="${rutVali != null}">
+		<div class="columns is-centered mt-4 mb-1">
+			<div class="column has-text-centered  mt-4 is-6">
+				<div class="notification is-primary mt-4">
+                                    <h4 class="title">${rutVali}</h4>
+				</div>
+			</div>
+		</div>
+            </c:if>
+	</div>
+    
+    <!-- VENTANA DE ALERTA ERRORES EN FORMULARIO -->
 	<div class="container mt-4">
         <c:if  test="${errores != null}">
 		<div class="columns is-centered mt-4 mb-1">
 			<div class="column  mt-4 is-6">
-				<div class="notification is-primary mt-4">
+				<div class="notification is-warning mt-4">
                                     <h6 class="subtitle">EXISTEN ERRORES EN LOS DATOS!</h6>
-                                    <h4>${rutVali}</h4>
+                                    
 					<div class="content">
 						<ul>
                                                     <c:forEach items="${errores}" var="error">
@@ -26,7 +40,7 @@
             </c:if>
 	</div>
 	
-
+    <!-- FORMULARIO DE INGRESO DE ASISTENTE -->
 	<div class="columns is-centered">
 		<div class="column is-5">
 			<form method="POST" action="IngresarAsistentesController.do">

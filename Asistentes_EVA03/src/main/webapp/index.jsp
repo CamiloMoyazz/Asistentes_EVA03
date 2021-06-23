@@ -14,7 +14,11 @@
     <p class="subtitle">¿Deseas ser parte de nuestro equipo? Que esperas! Ven y Registrate!</p>
     <a class="button is-outlined is-danger" href="IngresarAsistentesController.do">Ingresar!</a>
   </div>
+  <div class="hero-body">
+    
+  </div>
 </section>
+
 
 
 </body>

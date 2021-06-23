@@ -59,7 +59,7 @@ public class IngresarAsistentesController extends HttpServlet {
             //          ---- VERIFICACION DE RUT CHILENO VALIDO ----
             
             try{
-                // ELIMINARMOS CUALQUIER CARACTER QUE NO NOS IMPORTE
+                // ELIMINARMOS CUALQUIER CARACTER QUE NO NOS IMPORTE 
 				rut = rut.toUpperCase();
 				rut = rut.replace(".", "");
 				rut = rut.replace("-", "");
@@ -189,8 +189,9 @@ public class IngresarAsistentesController extends HttpServlet {
 				}
             }catch(Exception ex){
                 errores.add("Debe Ingresar un Rut Chileno Válido");
-            }
+            }    
         }
+        
         
         //VALIDACION APELLIDO
         String apellido = request.getParameter("apellido-txt");
@@ -206,6 +207,9 @@ public class IngresarAsistentesController extends HttpServlet {
             int edadPars = 0;
             try{
                 edadPars = Integer.parseInt(edad);
+                if(edadPars < 18){
+                    errores.add("Debe Tener Al Menos 18 Años");
+                }
             }catch(Exception ex){
                 errores.add("Debe Ingresar una Edad Válida");
             }
@@ -216,6 +220,8 @@ public class IngresarAsistentesController extends HttpServlet {
         String empresa = request.getParameter("empresa-txt");
         if(empresa.isEmpty()){
             errores.add("Debe Ingresar una Empresa");
+        }else if(empresa.length() < 6){
+            errores.add("La Empresa Debe Tener Al Menos 6 Letras");
         }
         
         String estado = request.getParameter("estado-select");
@@ -227,14 +233,40 @@ public class IngresarAsistentesController extends HttpServlet {
         asis.setEstado(estado);
         asis.setRegion(region);
         
-        if(errores.isEmpty()){
-                asistenteImp.ingresarAsistente(asis);   
-        }else{ 
-            request.setAttribute("errores", errores);
+        
+        //    ---- VALIDACION DE ASISTENTE EXISTENTE EN LA BD ---- 
+        
+        //APLICAMOS LA LOGICA DE UN FILTRO , PERO PREGUNTAMOS SI EL RUT ES IGUAL AL RUT DE ALGUN ASISTENTE DE LA LISTA
+        // ENTONCES LANZAMOS UN ERROR , ESTATICO HACIA EL JSP
+        List<Asistente> asistentes = asistenteImp.listaAsistentes();
+        String rutRegistrado = "";
+        
+        for(Asistente asisTemp : asistentes){
+            if(rut.equalsIgnoreCase(asisTemp.getRut())){
+                rutRegistrado = "Cuidado! Asistente Ya Registrado!";
+            }
         }
+        
+        
+       //        ---- REDIRECCIONES ----
        
-            
-         doGet(request, response);
+       
+        //PREGUNTAMOS , RUTREGISTRADO ES VACIO?  ENTONCES PUEDES PERSISTIR EL ASISTENTE.
+        //SI NO LANZA LOS ERRORES Y REGIRIGE AL DOGET.
+        
+        // EN EL CASO DE QUE RUTREGISTRADO DE TRUE, LANZA EL ERROR DE RUTVALI, REEDIRECCIONANDO A DOGET
+        if(rutRegistrado.isEmpty()){
+            if(errores.isEmpty()){
+                asistenteImp.ingresarAsistente(asis);   
+                response.sendRedirect("MostrarAsistentesController.do");
+              }else{ 
+                request.setAttribute("errores", errores);
+                doGet(request, response);
+                }
+        }else{
+             request.setAttribute("rutVali", rutRegistrado);
+             doGet(request, response);
+        }
     }
 
 }

@@ -31,6 +31,7 @@ public class MostrarAsistentesController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //       ---- FILTRADO DE TABLA ----
         
             //DECLARAMOS 2 LISTAS
             // 1 PARA OBTENER TODAS LAS SOLICITUDES

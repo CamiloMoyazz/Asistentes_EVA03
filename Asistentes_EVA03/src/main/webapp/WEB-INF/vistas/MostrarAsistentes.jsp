@@ -4,6 +4,7 @@
 	<jsp:include page="../templates/header.jsp"></jsp:include>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+        <!-- FILTRO DEL DATAGRID  -->
 	<main class="container">
 		<div class="columns is-centered">
 			<div class="column is-6 mt-5">
@@ -13,7 +14,7 @@
 					<div class="select">
 						<select name="filtro-select" id="filtro-select">
                                                         <option>Todas</option>
-							<option>Pagado</option>
+							<option>Pagada</option>
 							<option>Con Deuda</option>
 						</select>
 					</div>
@@ -24,6 +25,8 @@
 			</form>
 			</div>
 		</div>
+            
+            <!-- TABLA CON CONTENIDO DE ASISTENTES -->
 		<div class="columns is-centered">
 			<div class="column is-8">
 				<table class="table is-fullwidth is-hoverable">
