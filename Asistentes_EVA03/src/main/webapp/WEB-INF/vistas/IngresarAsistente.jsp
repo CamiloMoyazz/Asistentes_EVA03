@@ -1,25 +1,31 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 	<jsp:include page="../templates/header.jsp"></jsp:include>
 	
 <main class="container">
-	<!--  
+  
 	<div class="container mt-4">
-			<div class="columns is-centered mt-4 mb-1">
-				<div class="column  mt-4 is-6">
-					<div class="notification is-primary mt-4">
-						<h6>Asistente ya Registrado</h6>
-						<div class="content">
-							<ul>
-								
-							</ul>
-						</div>
+        <c:if  test="${errores != null}">
+		<div class="columns is-centered mt-4 mb-1">
+			<div class="column  mt-4 is-6">
+				<div class="notification is-primary mt-4">
+                                    <h6 class="subtitle">EXISTEN ERRORES EN LOS DATOS!</h6>
+                                    <h4>${rutVali}</h4>
+					<div class="content">
+						<ul>
+                                                    <c:forEach items="${errores}" var="error">
+                                                        <li>${error}</li>
+                                                    </c:forEach>	
+						</ul>
 					</div>
 				</div>
 			</div>
+		</div>
+            </c:if>
 	</div>
-	-->
+	
 
 	<div class="columns is-centered">
 		<div class="column is-5">

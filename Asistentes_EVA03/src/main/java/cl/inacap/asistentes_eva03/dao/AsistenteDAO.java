@@ -16,7 +16,7 @@ public interface AsistenteDAO {
     
     public List<Asistente> getAll();
     public int totalAsistentes();
-    public Asistente findByRut(Asistente asistente);
+    public String findByRut(String rut);
     public void insertAsistente(Asistente asistente);
     public void deleteAsistente(Asistente asistente);
     

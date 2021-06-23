@@ -8,14 +8,17 @@ package cl.inacap.asistentes_eva03.dao;
 import cl.inacap.asistentes_eva03.dto.Asistente;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 
 /**
  *
  * @author Chalabera
  */
+@Transactional()
 public class AsistenteDAOImp implements AsistenteDAO{
     
     @PersistenceContext(unitName = "Asistente" )
@@ -27,20 +30,15 @@ public class AsistenteDAOImp implements AsistenteDAO{
     }
 
     @Override
-    public Asistente findByRut(Asistente asistente) {
-        return em.find(Asistente.class, asistente.getRut());
+    public String findByRut(String rut) {
+        Query query = em.createQuery("FROM Asistente a where a.Rut = :rut");
+        query.setParameter("rut", "%" + rut + "%");
+        return (String) query.getSingleResult();
     }
 
     @Override
     public void insertAsistente(Asistente asistente) {
-        
-        try{
-            em.persist(asistente);
-        }catch(Exception e){
-            System.err.println(e);
-        }
-        
-        
+        em.persist(asistente);
     }
 
     @Override
@@ -55,6 +53,8 @@ public class AsistenteDAOImp implements AsistenteDAO{
         long total = ((Number) queryCount.getSingleResult()).longValue();
         return (int) total;
     }
+
+
 
     
 }

@@ -25,8 +25,8 @@ public class AsistenteServiceImp implements AsistenteService {
     }
 
     @Override
-    public Asistente encontrarPorRut(Asistente asistente) {
-        return asistenteDAO.findByRut(asistente);
+    public String encontrarPorRut(String rut) {
+        return asistenteDAO.findByRut(rut);
     }
 
     @Override
